@@ -4,7 +4,7 @@ const accounts = [
     { name: "Alf David", number: "2301-8880", balance: 2500 }
 ];
 
-// DOM elements
+// elements
 const loginSection = document.getElementById("loginSection");
 const accountSection = document.getElementById("accountSection");
 const userNameDisplay = document.getElementById("userNameDisplay");
