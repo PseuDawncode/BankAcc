@@ -15,17 +15,17 @@ const transactionForm = document.getElementById("transactionForm");
 let currentUser = null;
 let transactionType = null;
 
-// Login functionality
+// login section functionality
 document.getElementById("loginBtn").addEventListener("click", function() {
     const accountName = document.getElementById("accountName").value.trim();
     const accountNumber = document.getElementById("accountNumber").value.trim();
     
     if (!accountName || !accountNumber) {
-        alert("Please enter both account name and number.");
+        alert("Please enter valid account name and valid number.");
         return;
     }
     
-    // Check if account exists
+    // user account validation
     const user = accounts.find(acc => 
         acc.name.toLowerCase() === accountName.toLowerCase() && 
         acc.number === accountNumber
@@ -38,15 +38,15 @@ document.getElementById("loginBtn").addEventListener("click", function() {
         loginSection.classList.add("hidden");
         accountSection.classList.remove("hidden");
         
-        // Clear input fields
+        // clear input fields
         document.getElementById("accountName").value = "";
         document.getElementById("accountNumber").value = "";
         
-        // Load transaction history
+        // load transaction history
         loadTransactionHistory();
     } else {
-        // Create new account if it doesn't exist
-        if (confirm("Account not found. Would you like to create a new account?")) {
+        // create new account
+        if (confirm("Account not found! Pleas enter a valid account")) {
             const newUser = {
                 name: accountName,
                 number: accountNumber,
@@ -63,28 +63,28 @@ document.getElementById("loginBtn").addEventListener("click", function() {
     }
 });
 
-// Initialize transaction arrays if they don't exist
+// initialize transaction arrays if they don't exist
 accounts.forEach(account => {
     if (!account.transactions) {
         account.transactions = [];
     }
 });
 
-// Deposit button click
+// deposit functionality
 document.getElementById("depositBtn").addEventListener("click", function() {
     transactionType = "deposit";
     document.getElementById("transactionAmount").value = "";
     transactionForm.classList.remove("hidden");
 });
 
-// Withdraw button click
+// withdraw functionality
 document.getElementById("withdrawBtn").addEventListener("click", function() {
     transactionType = "withdraw";
     document.getElementById("transactionAmount").value = "";
     transactionForm.classList.remove("hidden");
 });
 
-// Confirm transaction
+// confirm transaction
 document.getElementById("confirmTransactionBtn").addEventListener("click", function() {
     const amountInput = document.getElementById("transactionAmount");
     const amount = parseFloat(amountInput.value);
@@ -97,7 +97,7 @@ document.getElementById("confirmTransactionBtn").addEventListener("click", funct
     if (transactionType === "deposit") {
         currentUser.balance += amount;
         
-        // Add to transaction history
+        // transaction history functionality
         currentUser.transactions = currentUser.transactions || [];
         currentUser.transactions.push({
             type: "deposit",
@@ -115,7 +115,7 @@ document.getElementById("confirmTransactionBtn").addEventListener("click", funct
         
         currentUser.balance -= amount;
         
-        // Add to transaction history
+        // add to transaction history
         currentUser.transactions = currentUser.transactions || [];
         currentUser.transactions.push({
             type: "withdraw",
@@ -131,7 +131,7 @@ document.getElementById("confirmTransactionBtn").addEventListener("click", funct
     amountInput.value = "";
 });
 
-// Logout functionality
+// logout functionality
 document.getElementById("logoutBtn").addEventListener("click", function() {
     currentUser = null;
     accountSection.classList.add("hidden");
@@ -139,13 +139,13 @@ document.getElementById("logoutBtn").addEventListener("click", function() {
     historyList.innerHTML = "";
 });
 
-// Update UI
+// update UI
 function updateUI() {
     balanceAmount.textContent = currentUser.balance.toFixed(2);
     loadTransactionHistory();
 }
 
-// Load transaction history
+// load transaction history
 function loadTransactionHistory() {
     historyList.innerHTML = "";
     
@@ -154,7 +154,7 @@ function loadTransactionHistory() {
         return;
     }
     
-    // Sort transactions by date (newest first)
+    // sort transactions by date
     const sortedTransactions = [...currentUser.transactions].reverse();
     
     sortedTransactions.forEach(transaction => {
