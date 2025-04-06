@@ -1,7 +1,7 @@
-// Store user accounts (in a real application, this would be in a database)
+// user account
 const accounts = [
-    { name: "John Doe", number: "12345", balance: 1000 },
-    { name: "Jane Smith", number: "67890", balance: 2500 }
+    { name: "Mary Dawn", number: "123-444-888", balance: 1000 },
+    { name: "Alf David", number: "2301-8880", balance: 2500 }
 ];
 
 // DOM elements
