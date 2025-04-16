@@ -13,7 +13,7 @@ const historyList = document.getElementById("historyList");
 const transactionForm = document.getElementById("transactionForm");
 
 let currentUser = null;
-let transactionType = null;
+let transactionType = null; 
 
 // login section functionality
 document.getElementById("loginBtn").addEventListener("click", function() {
@@ -63,7 +63,6 @@ document.getElementById("loginBtn").addEventListener("click", function() {
     }
 });
 
-// initialize transaction arrays if they don't exist
 accounts.forEach(account => {
     if (!account.transactions) {
         account.transactions = [];
